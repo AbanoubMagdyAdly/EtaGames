@@ -27,7 +27,7 @@ public class BotPlayer extends Player {
     @Override
     public void playTurn(XOGame game) {
         System.out.println("Array of count" + replayArray[count] + "  " + botShape);
-             
+
         game.tick(botShape, replayArray[count++]);
 
     }
