@@ -12,7 +12,7 @@ import javafx.scene.layout.FlowPane;
  *
  * @author a-tarek
  */
-class VisualGameBoard extends FlowPane {
+public class VisualGameBoard extends FlowPane {
 
     public static VisualCell vCells[] = new VisualCell[9];
 
