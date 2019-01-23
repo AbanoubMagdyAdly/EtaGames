@@ -39,7 +39,7 @@ public class BaseTurn extends AnchorPane {
         button.setOnAction(e -> {
             if (!EtaGames.bp.getStyle().equals("-fx-background-color: black;")) {
                 EtaGames.bp.setStyle("-fx-background-color: black;");
-                URL resource = getClass().getResource("SongHighbeat.mp3");
+                URL resource = getClass().getResource("Highbeat.mp3");
                 Media media = new Media(resource.toString());
                 EtaGames.mediaPlayer.stop();
                 EtaGames.newMediaPlayer =new MediaPlayer(media);
