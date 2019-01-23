@@ -20,7 +20,8 @@ import javafx.stage.Stage;
  */
 public class EtaGames extends Application {
     public static BorderPane bp;
-
+    public static MediaPlayer mediaPlayer;
+    public static MediaPlayer newMediaPlayer;
 
     @Override
     public void start(Stage primaryStage) {
@@ -28,11 +29,11 @@ public class EtaGames extends Application {
         SplashScreenPane Ss = new SplashScreenPane();
         bp.setCenter(Ss);
         URL resource = getClass().getResource("StayTheNight.mp3");
-        final Media media = new Media(resource.toString());
-        final MediaPlayer mediaPlayer = new MediaPlayer(media);
+        Media media = new Media(resource.toString());
+        mediaPlayer = new MediaPlayer(media);
         mediaPlayer.play();
 
-        primaryStage.setScene(new Scene(bp, 750, 600));
+        primaryStage.setScene(new Scene(bp, 750, 640));
         primaryStage.setResizable(false);
         primaryStage.show();
 //        try {
@@ -44,6 +45,8 @@ public class EtaGames extends Application {
         bp.setLeft(s);
         ModeSelectionPane fs = new ModeSelectionPane();
         bp.setCenter(fs);
+        BaseTurn baseTurn=new BaseTurn();
+        bp.setBottom(baseTurn);
         
 //        SigninPane sb = new SigninPane();
 //        XOGame xo = new XOGame(new OfflinePlayer(true),new OfflinePlayer(false));
