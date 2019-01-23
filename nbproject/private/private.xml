@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/EtaGames.java</file>
+            <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/LevelSelectionPane.java</file>
+            <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/BaseTurn.java</file>
             <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/xogame/AIPlayer.java</file>
             <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/xogame/XOGame.java</file>
+            <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/ModeSelectionPane.java</file>
+            <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/xogame/VisualGameBoard.java</file>
+            <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/xogame/VisualCell.java</file>
             <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/xogame/BotPlayer.java</file>
+            <file>file:/C:/Users/abano/OneDrive/Java%20Project/EtaGames/src/etagames/SigninPane.java</file>
         </group>
     </open-files>
 </project-private>
