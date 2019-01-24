@@ -28,7 +28,9 @@ public class VisualGameBoard extends FlowPane {
             vCell.setStyle("-fx-font: 75 arial;-fx-background-color:#ecebe9,rgba(0,0,0,0.05),linear-gradient(#dcca8a, #c7a740),linear-gradient(#f9f2d6 0%, #f4e5bc 20%, #e6c75d 80%, #e2c045 100%),linear-gradient(#f6ebbe, #e6c34d);-fx-background-insets: 0,9 9 8 9,9,10,11;-fx-background-radius: 50;-fx-padding: 15 30 15 30;-fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.1) , 2, 0.0 , 0 , 1)");
             vCells[i] = vCell;
             this.getChildren().add(vCell);
-            VisualCell.timeline.play();
+            if (!XOGame.isBot) {
+                VisualCell.timeline.play();
+            }
 
         }
     }

@@ -1,13 +1,10 @@
 package etagames;
 
-import java.lang.*;
 import java.net.URL;
-import java.util.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.*;
 import javafx.scene.text.*;
 
 public class BaseTurn extends AnchorPane {

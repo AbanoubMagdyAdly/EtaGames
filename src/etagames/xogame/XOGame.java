@@ -43,10 +43,9 @@ public class XOGame {
     private VisualGameBoard vGameBoard;
     private GameState gameState;
     private List<Image> images;
-//    private int[] XReplay=new int[5]; 
-//    private int[] OReplay=new int[4]; 
     private int turnsLeft = 9;
     WritableImage image = new WritableImage(750, 600);
+    public static boolean isBot;
 
     public XOGame(Player p1, Player p2) {
         System.out.println("etagames.xogame.XOGame.<init>()");
@@ -54,8 +53,14 @@ public class XOGame {
         this.p2 = p2;
         this.currentPlayer = this.p2;
         this.gameState = GameState.playable;
+        if (p1 instanceof BotPlayer) {
+            isBot = true;
+        }
+        else
+            isBot=false;
         gameBoard = new GameBoard();
         vGameBoard = new VisualGameBoard();
+
 
         /*  
             GAME LOOP
@@ -123,12 +128,12 @@ public class XOGame {
         ButtonType replay = new ButtonType("Replay");
         alert.getButtonTypes().clear();
         if (!(p1 instanceof BotPlayer)) {
-            alert.getButtonTypes().addAll(rematch, /*replay,*/ bTM);
+            alert.getButtonTypes().addAll(rematch, replay, bTM);
         } else {
             alert.getButtonTypes().addAll(bTM);
         }
         Optional<ButtonType> option;
-        if (this.gameState == GameState.playable||this.gameState == GameState.playable) {
+        if (this.gameState == GameState.playable || this.gameState == GameState.playable) {
             alert.setHeaderText("We Don't Have A Winner");
             alert.setContentText("Draw");
         } else {
@@ -144,17 +149,15 @@ public class XOGame {
         } else if (option.get() == bTM) {
             ModeSelectionPane fs = new ModeSelectionPane();
             EtaGames.bp.setCenter(fs);
+        } else if (option.get() == replay) {
+            XOGame xo = new XOGame(new BotPlayer(true), new BotPlayer(false));
+            EtaGames.bp.setCenter(xo.getVisualGameBoard());
+        } else {
+            Platform.exit();
         }
-//else if (option.get() == replay) {
-//            XOGame xo = new XOGame(new BotPlayer(true), new BotPlayer(false));
-//            EtaGames.bp.setCenter(xo.getVisualGameBoard());
-//        }
-        else {
-        Platform.exit();
     }
-}
 
-public void replay() {
+    public void replay() {
         WritableImage snapshot = EtaGames.bp.getCenter().snapshot(new SnapshotParameters(), image);
         File file = new File("Screen" + (9 - turnsLeft) + ".png");
         try {

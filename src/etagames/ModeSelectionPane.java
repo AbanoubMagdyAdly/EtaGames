@@ -1,7 +1,6 @@
 package etagames;
 
 import etagames.xogame.OfflinePlayer;
-import etagames.xogame.VisualCell;
 import etagames.xogame.XOGame;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;

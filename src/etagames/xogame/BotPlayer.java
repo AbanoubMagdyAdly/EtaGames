@@ -7,6 +7,7 @@ package etagames.xogame;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 
 /**
  *
@@ -27,8 +28,17 @@ public class BotPlayer extends Player {
     @Override
     public void playTurn(XOGame game) {
         System.out.println("Array of count" + replayArray[count] + "  " + botShape);
-
-        game.tick(botShape, replayArray[count++]);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(BotPlayer.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                game.tick(botShape, replayArray[count++]);
+            }
+        });
 
     }
 
