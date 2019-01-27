@@ -51,7 +51,7 @@ public class XOGame {
         System.out.println("etagames.xogame.XOGame.<init>()");
         this.p1 = p1;
         this.p2 = p2;
-        this.currentPlayer = this.p2;
+        this.currentPlayer = this.p1;
         this.gameState = GameState.playable;
         if (p1 instanceof BotPlayer) {
             isBot = true;

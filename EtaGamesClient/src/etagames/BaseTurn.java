@@ -10,14 +10,12 @@ import javafx.scene.text.*;
 public class BaseTurn extends AnchorPane {
 
     protected final Button button;
-    protected final Label label;
-    protected final Label label0;
+    public static Label label;
 
     public BaseTurn() {
 
         button = new Button();
         label = new Label();
-        label0 = new Label();
 
         setId("AnchorPane");
         setMaxHeight(USE_PREF_SIZE);
@@ -28,14 +26,15 @@ public class BaseTurn extends AnchorPane {
         setPrefWidth(600.0);
 
         button.setLayoutX(620.0);
-        button.setLayoutY(4.0);
+        button.setLayoutY(10.0);
         button.setMnemonicParsing(false);
-        button.setText("Change Style");
+        button.setText("Change Mode 😂");
         button.setFont(new Font(15.0));
         button.setStyle("-fx-background-color: linear-gradient(#ff5400, #be1d00);-fx-background-radius: 30; -fx-background-insets: 0; -fx-text-fill: white;");
         button.setOnAction(e -> {
             if (!EtaGames.bp.getStyle().equals("-fx-background-color: black;")) {
                 EtaGames.bp.setStyle("-fx-background-color: black;");
+                button.setText("Change Mode 😈");
                 URL resource = getClass().getResource("Highbeat.mp3");
                 Media media = new Media(resource.toString());
                 EtaGames.mediaPlayer.stop();
@@ -43,6 +42,7 @@ public class BaseTurn extends AnchorPane {
                 EtaGames.newMediaPlayer.play();
             } else {
                 EtaGames.bp.setStyle("-fx-background-color: gary;");
+                button.setText("Change Mode 😂");
                 EtaGames.newMediaPlayer.stop();
                 EtaGames.mediaPlayer.play();
             }
@@ -50,16 +50,13 @@ public class BaseTurn extends AnchorPane {
 
         label.setLayoutX(33.0);
         label.setLayoutY(6.0);
-        label.setText("Player turn : ");
+        label.setText("");
         label.setFont(new Font(20.0));
+        label.setStyle("-fx-stroke: gray;");
 
-        label0.setLayoutX(89.0);
-        label0.setLayoutY(12.0);
-        label0.setText("");
 
         getChildren().add(button);
         getChildren().add(label);
-        getChildren().add(label0);
 
     }
 }

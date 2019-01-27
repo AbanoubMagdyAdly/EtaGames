@@ -6,6 +6,7 @@
 package etagames;
 
 import java.util.ArrayList;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import shared.UserAccount;
@@ -23,6 +24,13 @@ import static shared.UserAccount.UserStatus.BUSY;
 class FriendsListVBox extends VBox {
 
     FriendsListVBox(ArrayList<UserAccount> friends) {
+        setMaxHeight(USE_PREF_SIZE);
+        setMaxWidth(USE_PREF_SIZE);
+        setMinHeight(USE_PREF_SIZE);
+        setMinWidth(USE_PREF_SIZE);
+        setPrefHeight(400.0);
+        setPrefWidth(150.0);
+        setPadding(new Insets(0, 10, 0, 10));
         for (UserAccount friend : friends) {
             System.out.println(friend.toString());
 

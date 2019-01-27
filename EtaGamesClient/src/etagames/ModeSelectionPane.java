@@ -1,7 +1,13 @@
 package etagames;
 
+import etagames.xogame.LocalOnlinePlayer;
 import etagames.xogame.OfflinePlayer;
+import etagames.xogame.RemoteOnlinePlayer;
 import etagames.xogame.XOGame;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,6 +23,7 @@ public class ModeSelectionPane extends AnchorPane {
     protected final Button button1;
     protected final Button button2;
     public static BorderPane XOBP;
+
     public ModeSelectionPane() {
 
         imageView = new ImageView();
@@ -66,7 +73,7 @@ public class ModeSelectionPane extends AnchorPane {
         button0.setText("MultiPlayer");
         button0.setFont(new Font("System Bold", 18.0));
         button0.setOnAction(e -> {
-            XOGame xo = new XOGame(new OfflinePlayer(true),new OfflinePlayer(false));
+            XOGame xo = new XOGame(new OfflinePlayer(true), new OfflinePlayer(false));
             EtaGames.bp.setCenter(xo.getVisualGameBoard());
 
         });
@@ -78,7 +85,19 @@ public class ModeSelectionPane extends AnchorPane {
         button1.setPrefWidth(137.0);
         button1.setText("Online");
         button1.setFont(new Font("System Bold", 18.0));
-        button1.setDisable(true);
+
+        button1.setOnAction(e -> {
+            try {
+                Socket socket = new Socket("192.168.1.26", 9090);
+                XOGame xo = new XOGame(new LocalOnlinePlayer(true, socket),new RemoteOnlinePlayer(false, socket));
+//                XOGame xo = new XOGame(new RemoteOnlinePlayer(true, socket),new LocalOnlinePlayer(false, socket));
+                EtaGames.bp.setCenter(xo.getVisualGameBoard());
+
+            } catch (IOException ex) {
+                Logger.getLogger(ServerConnection.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        });
 
         button2.setLayoutX(50.0);
         button2.setLayoutY(520.0);
@@ -98,8 +117,9 @@ public class ModeSelectionPane extends AnchorPane {
         getChildren().add(button);
         getChildren().add(button0);
         getChildren().add(button1);
-        if(EtaGames.bp.getLeft().isDisabled())
-        getChildren().add(button2);
+        if (EtaGames.bp.getLeft().isDisabled()) {
+            getChildren().add(button2);
+        }
 
     }
 

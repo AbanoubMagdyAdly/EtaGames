@@ -1,9 +1,6 @@
 package etagames;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -69,7 +66,7 @@ public class SigninPane extends VBox {
         loginButton.setStyle("-fx-background-color: linear-gradient(#ff5400, #be1d00);-fx-background-radius: 30; -fx-background-insets: 0; -fx-text-fill: white;");
 
         registerButton.setMnemonicParsing(false);
-        registerButton.setText("Signin");
+        registerButton.setText("Signup");
         registerButton.setStyle("-fx-background-color: linear-gradient(#ff5400, #be1d00);-fx-background-radius: 30; -fx-background-insets: 0; -fx-text-fill: white;");
 
 //        button.setOnAction(e->{
@@ -120,10 +117,10 @@ public class SigninPane extends VBox {
                 // putting list in friendsVBox 
                 friendsVbox = new FriendsListVBox(getFriendsResponse.getFriends());
                 // Swapping the vbox view to the friendslist view 
-                getChildren().removeAll();
-                getChildren().add(friendsVbox);
                 
-
+                EtaGames.bp.setLeft(friendsVbox);
+                
+                
             } else {
                 message = "Name or password do not match";
             }

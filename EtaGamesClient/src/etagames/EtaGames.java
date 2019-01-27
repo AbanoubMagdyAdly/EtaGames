@@ -19,6 +19,7 @@ import javafx.stage.Stage;
  * @author a-tarek
  */
 public class EtaGames extends Application {
+   
     public static BorderPane bp;
     public static MediaPlayer mediaPlayer;
     public static MediaPlayer newMediaPlayer;
@@ -29,10 +30,10 @@ public class EtaGames extends Application {
         SplashScreenPane Ss = new SplashScreenPane();
         bp.setCenter(Ss);
         
-//        URL resource = getClass().getResource("StayTheNight.mp3");
-//        Media media = new Media(resource.toString());
-//        mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.play();
+        URL resource = getClass().getResource("StayTheNight.mp3");
+        Media media = new Media(resource.toString());
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.play();
      
         primaryStage.setScene(new Scene(bp, 750, 640));
         primaryStage.setResizable(false);
@@ -47,7 +48,7 @@ public class EtaGames extends Application {
         ModeSelectionPane fs = new ModeSelectionPane();
         bp.setCenter(fs);
         BaseTurn baseTurn=new BaseTurn();
-        bp.setBottom(baseTurn);
+        bp.setTop(baseTurn);
         
 //        SigninPane sb = new SigninPane();
 //        XOGame xo = new XOGame(new OfflinePlayer(true),new OfflinePlayer(false));
