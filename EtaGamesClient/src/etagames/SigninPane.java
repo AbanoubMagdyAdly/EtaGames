@@ -118,7 +118,7 @@ public class SigninPane extends VBox {
                 friendsVbox = new FriendsListVBox(getFriendsResponse.getFriends());
                 // Swapping the vbox view to the friendslist view 
                 
-                EtaGames.bp.setLeft(friendsVbox);
+                //EtaGames.bp.setLeft(friendsVbox);
                 
                 
             } else {

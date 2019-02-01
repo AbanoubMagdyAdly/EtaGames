@@ -4,11 +4,16 @@ import etagames.xogame.LocalOnlinePlayer;
 import etagames.xogame.OfflinePlayer;
 import etagames.xogame.RemoteOnlinePlayer;
 import etagames.xogame.XOGame;
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -88,12 +93,39 @@ public class ModeSelectionPane extends AnchorPane {
 
         button1.setOnAction(e -> {
             try {
-                Socket socket = new Socket("192.168.1.26", 9090);
-                XOGame xo = new XOGame(new LocalOnlinePlayer(true, socket),new RemoteOnlinePlayer(false, socket));
-//                XOGame xo = new XOGame(new RemoteOnlinePlayer(true, socket),new LocalOnlinePlayer(false, socket));
-                EtaGames.bp.setCenter(xo.getVisualGameBoard());
+                Socket socket = new Socket("172.16.1.66", 9090);
+                BaseTurn.label.setText("Waiting....");
+                DataInputStream dis = new DataInputStream(socket.getInputStream());
+                String token = dis.readLine();
+                
+                    System.out.println(token);
+                if ("X".equals(token)) {
+                    BaseTurn.label.setText("Turn  Player : X");
+                    System.out.println("ْْْْْْ");
+                    XOGame xo = new XOGame(new LocalOnlinePlayer(true, socket), new RemoteOnlinePlayer(false, socket));
+                    EtaGames.bp.setCenter(xo.getVisualGameBoard());
+                } else if ("O".equals(token)){
+                    XOGame xo = new XOGame(new RemoteOnlinePlayer(true, socket), new LocalOnlinePlayer(false, socket));
+                    EtaGames.bp.setCenter(xo.getVisualGameBoard());
+                }
+                else{
+                    
+                }
 
             } catch (IOException ex) {
+                 Alert alert = new Alert(Alert.AlertType.WARNING);
+                            Optional<ButtonType> option;
+                            alert.setHeaderText("The server is out");
+                            alert.setContentText("Please Retry LATER !!!");
+                            option = alert.showAndWait();
+//                            if (option.get() == null) {
+//                                Platform.exit();
+//                            } else if (option.get() == ButtonType.OK) {
+//                                ModeSelectionPane fs = new ModeSelectionPane();
+//                                EtaGames.bp.setCenter(fs);
+//                            } else {
+//                                Platform.exit();
+//                            }
                 Logger.getLogger(ServerConnection.class.getName()).log(Level.SEVERE, null, ex);
             }
 

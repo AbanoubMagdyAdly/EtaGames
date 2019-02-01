@@ -1,11 +1,14 @@
 package etagames.xogame;
 
+import etagames.BaseTurn;
+import static etagames.BaseTurn.label;
 import etagames.EtaGames;
 import etagames.ModeSelectionPane;
 import etagames.xogame.GameBoard.CellValue;
 import static etagames.xogame.XOGame.GameState.playable;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import javafx.application.Platform;
@@ -15,6 +18,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javax.imageio.ImageIO;
 
 /**
@@ -31,7 +36,7 @@ public class XOGame {
         ONLINE,
         REPLAY
     }
-
+MediaPlayer m;
     public enum GameState {
         player1_win,
         player2_win,
@@ -53,11 +58,11 @@ public class XOGame {
         this.p2 = p2;
         this.currentPlayer = this.p1;
         this.gameState = GameState.playable;
-        if (p1 instanceof BotPlayer) {
+        if (p1 instanceof BotPlayer||p1 instanceof LocalOnlinePlayer||p2 instanceof LocalOnlinePlayer) {
             isBot = true;
+        } else {
+            isBot = false;
         }
-        else
-            isBot=false;
         gameBoard = new GameBoard();
         vGameBoard = new VisualGameBoard();
 
@@ -80,6 +85,7 @@ public class XOGame {
     }
 
     public void tick(CellValue cv, int position) {
+        System.out.println(Thread.currentThread());
 
         BotPlayer.replayArray[9 - turnsLeft] = position;
         if (this.gameState == playable && turnsLeft > 0) {
@@ -97,6 +103,11 @@ public class XOGame {
         turnsLeft--;
         if (this.gameState == playable) {
             currentPlayer = (currentPlayer == p1) ? p2 : p1;
+            if (currentPlayer == p1) {
+                BaseTurn.label.setText("Turn  Player : X");
+            } else if (currentPlayer == p2) {
+                BaseTurn.label.setText("Turn  Player : O");
+            }
 //            turnsLeft--;
             gameState = gameBoard.checkGameBoard(cv);
             System.out.println(Integer.toString(turnsLeft) + "etagames.xogame.XOGame.tick()");
@@ -137,6 +148,11 @@ public class XOGame {
             alert.setHeaderText("We Don't Have A Winner");
             alert.setContentText("Draw");
         } else {
+            URL resource = getClass().getResource("win.mp3");
+                Media media = new Media(resource.toString());
+                EtaGames.mediaPlayer.stop();
+                 m=new MediaPlayer(media);
+                m.play();
             alert.setHeaderText("We Have A Winner");
             alert.setContentText("The Winner is : " + this.gameState);
         }
@@ -144,12 +160,30 @@ public class XOGame {
         if (option.get() == null) {
             Platform.exit();
         } else if (option.get() == rematch) {
+            try{
+            m.stop();
+            }
+            catch(Exception e){
+                
+            }
             XOGame xo = new XOGame(this.p1, this.p2);
             EtaGames.bp.setCenter(xo.getVisualGameBoard());
         } else if (option.get() == bTM) {
+                        try{
+            m.stop();
+            }
+            catch(Exception e){
+                
+            }
             ModeSelectionPane fs = new ModeSelectionPane();
             EtaGames.bp.setCenter(fs);
         } else if (option.get() == replay) {
+            try{
+            m.stop();
+            }
+            catch(Exception e){
+                
+            }
             XOGame xo = new XOGame(new BotPlayer(true), new BotPlayer(false));
             EtaGames.bp.setCenter(xo.getVisualGameBoard());
         } else {
